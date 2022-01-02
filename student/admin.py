@@ -8,3 +8,4 @@ class StudentAdmin(admin.ModelAdmin):
  
     
 admin.site.register(Student,StudentAdmin)
+admin.site.register(Subscripe)

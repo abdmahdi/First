@@ -1,5 +1,6 @@
 from django.db import models
 from Home.models import *
+from teacher.models import *
 
 
 # Create your models here.
@@ -19,3 +20,27 @@ class Student(models.Model):
     
     def __str__(self):
         return f"Mr. {self.first_name}   {self.last_name}   "
+
+
+class Subscripe(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    postteacher = models.ForeignKey(PostTeacher,on_delete=models.CASCADE, primary_key=True)
+    group = models.ForeignKey(Groupe, on_delete=models.CASCADE)
+    slug = models.SlugField(null=True, blank=True)
+    
+    def __str__(self):
+        return f"Mr. {self.student.first_name}   {self.student.last_name} + {self.postteacher.slug}  "
+    
+    def save(self, *args, **kwargs):
+       if self.slug == None:
+           slug = slugify(f"{self.student.lastname}-{self.postteacher.slug}")
+           has_slug = Subscripe.objects.filter(slug=slug).exists()
+           count = 1
+           while has_slug:
+               count+=1
+               slug = slugify(f"{self.student.lastname}-{self.postteacher.slug}")+ '-' + str(count)
+               has_slug = Subscripe.objects.filter(slug=slug).exists()
+               
+           self.slug = slug     
+        
+       super().save(*args, **kwargs)   
