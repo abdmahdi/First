@@ -83,6 +83,7 @@ def post(request,slug):
     return render(request, 'student/post.html', context)
 
 
+
 @student_required
 def postsch(request,slug):
     post = PostSchool.objects.get(slug=slug)
@@ -165,3 +166,27 @@ def updateProfile(request):
 
 	context = {'form':form}
 	return render(request, 'student/profile_form.html', context)
+
+
+
+@student_required 
+def subscripeTeach(request,slug):
+    form = SubTeacher()
+    if request.method =='POST':
+        form = SubTeacher(request.POST , request.FILES )  
+        if form.is_valid():
+              
+            obj = form.save(commit = False)
+            obj.student = request.user.student;
+            obj.postteacher = PostTeacher.objects.get(slug=slug)
+            obj.group = Groupe.objects.get(postteacher=obj.postteacher,N_groupe=2)
+            place = obj.group.nombredeplace -1
+            Groupe.objects.update(N_groupe=2, nombredeplace = place )
+            
+            obj.save()
+            form = SubTeacher()
+            messages.success(request, "Successfully created")
+            return redirect('HomeStudent')
+          
+  
+    return render(request, 'student/subTeacher.html', {'form':form})  

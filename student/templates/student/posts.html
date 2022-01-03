@@ -16,9 +16,9 @@
 
 <div class="main-container">
 	<h1>Posts</h1>
-	{% if request.user.is_staff %}
+	{% comment %} {% if request.user.is_staff %}
 		<a class="btn btn-warning" href="{% url 'create_post' %}">Create Post</a>
-	{% endif %}
+	{% endif %} {% endcomment %}
 	<form id="searchForm" method="GET">
 		{{myFilter.form|crispy}}
 		

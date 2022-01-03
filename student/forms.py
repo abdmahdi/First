@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from django.db import transaction
+from django.db.models import fields
 from student.models import *
 from Home.models import *
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -87,3 +88,10 @@ class ProfileForm(forms.ModelForm):
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(label='Email / Username')
+    
+
+class SubTeacher(forms.ModelForm):
+    class Meta:
+        model =SubscripeTeacher    
+        fields = "__all__"
+        exclude=['student', 'postteacher', 'group', 'slug']

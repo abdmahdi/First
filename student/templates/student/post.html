@@ -83,10 +83,11 @@
 	<label for="title">Groups</label>
 <select id="title" name="title">
  <option value="" selected>Please choose</option>
-	{% for group in groups  %}
- <option value="{{group}}">{{group.Days}} // from : {{group.starttime}}   to : {{group.endstime}}</option>
- {% endfor %}
+
 </select>
+{% for group in groups  %}
+<a href="{% url 'SubscripeTeacher' post.slug %}"> <h1>{{group.Days}} // from : {{group.starttime}}   to : {{group.endstime}}</h1></a>
+ {% endfor %}
 
 	<h1></h1>
 	

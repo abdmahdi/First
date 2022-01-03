@@ -8,6 +8,7 @@ urlpatterns = [
     path('postshool/', postschool, name="Postshool"),
     path('post/<slug:slug>/', post, name="postTeacher"),
     path('postschool/<slug:slug>/', postsch, name="post"),
+    path('Subscripe/<slug:slug>/', subscripeTeach, name="SubscripeTeacher"),
     
     # Sign UP Student
     path('register/',StudentSignUpView.as_view(), name="registerStudent"),
