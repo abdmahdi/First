@@ -15,6 +15,19 @@
 </style>
 
 <div class="main-container">
+	{% if messages %}
+			{% for message in messages %}
+				{% if message.tags == 'success' %}
+					<div class="alert alert-success" role="alert">
+						<span>{{message}}</span>					
+					</div>
+				{% elif message.tags == 'error' %}
+					<div class="alert alert-danger" role="alert">
+						<span>{{message}}</span>					
+					</div>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
 	<h1>Posts</h1>
 	{% comment %} {% if request.user.is_staff %}
 		<a class="btn btn-warning" href="{% url 'create_post' %}">Create Post</a>
