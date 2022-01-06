@@ -86,7 +86,7 @@
 
 </select>
 {% for group in groups  %}
-<a href="{% url 'SubscripeTeacher' post.slug %}"> <h1>{{group.Days}} // from : {{group.starttime}}   to : {{group.endstime}}</h1></a>
+<a href="{% url 'SubscripeTeacher' group.slug %}"> <h1>{{group.Days}} // from : {{group.starttime}}   to : {{group.endstime}}</h1></a>
  {% endfor %}
 
 	<h1></h1>

@@ -66,6 +66,21 @@ class Groupe(models.Model):
     starttime = models.TimeField()
     endstime = models.TimeField()    
     nombredeplace = models.IntegerField(default=None)
+    slug =models.SlugField(null=True,blank=True)
     
     def __str__(self):
         return f"{self.Days} /// start at : {self.starttime} ends at {self.endstime} "
+    
+    def save(self, *args, **kwargs):
+       if self.slug == None:
+           slug = slugify(f"{self.postteacher.slug}/{self.N_groupe}")
+           has_slug = Groupe.objects.filter(slug=slug).exists()
+           count = 1
+           while has_slug:
+               count+=1
+               slug = slugify(f"{self.postteacher.slug}/{self.N_groupe}")+ '-' + str(count)
+               has_slug = Groupe.objects.filter(slug=slug).exists()
+               
+           self.slug = slug     
+        
+       super().save(*args, **kwargs)   

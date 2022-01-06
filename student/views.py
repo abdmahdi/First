@@ -178,18 +178,19 @@ def subscripeTeach(request,slug):
               
             obj = form.save(commit = False)
             student = request.user.student
-            post=  PostTeacher.objects.get(slug = slug)
-            group = Groupe.objects.filter(postteacher = post)
-           
+            group = Groupe.objects.get(slug =slug)
+            slugteacher=group.postteacher.slug
+            post=  PostTeacher.objects.get(slug = slugteacher)
             if SubscripeTeacher.objects.filter(student = student, postteacher = post).exists():
                  messages.error(request, "User already subscripe")
                  return redirect('Posts')
             else:    
-                 obj.group = Groupe.objects.get(postteacher=post)
+                 obj.group = Groupe.objects.get(slug=slug)
                  obj.student = student
-                 obj.postteacher = PostTeacher.objects.get(slug=slug)
+                 obj.postteacher = PostTeacher.objects.get(slug=slugteacher)
                  place = obj.group.nombredeplace -1
-                 group.update(postteacher = post,nombredeplace = place)
+                 group = Groupe.objects.filter(slug =slug)
+                 group.update(slug =slug,nombredeplace = place)
                  
                  obj.save()
                  form = SubTeacher()
@@ -198,3 +199,11 @@ def subscripeTeach(request,slug):
           
   
     return render(request, 'student/subTeacher.html', {'form':form})  
+
+
+
+def studentsubteach(request):
+    student = request.user.student
+    subs =  SubscripeTeacher.objects.filter(student =student)
+    context = {'subs':subs}
+    return render(request, 'student/studentsubscripe.html',context)
