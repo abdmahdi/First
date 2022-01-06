@@ -47,9 +47,9 @@
 				<a class="btn btn-info btn-block" href="{% url 'update_profileStudent' %}">Edit Profile</a>
 			</div>
 		</div>
-		{% comment %} <div class="col-md-8">
+		 <div class="col-md-8">
 			<div class="card card-body">
-				<h3>My Orders:</h3>
+				<h3>My Subscrips:</h3>
 				<hr>
 				<table class="table">
 					<thead class="thead-dark">
@@ -61,24 +61,22 @@
 							<th></th>
 						</tr>
 					</thead>
+					{% for sub in subs %}
 					<tr>
-						<td>122523462</td>
-						<td>11-24-2020</td>
+						<td>{{sub.group.Days}}</td>
+						<td>{{sub.postteacher.teacher}}</td>
 						<td>2</td>
 						<td>$12.18</td>
-						<td><a class="btn btn-dark btn-sm" href="">View Order</a></td>
+						<td><a class="btn btn-dark btn-sm" href="">Update</a></td>
+						<td><a class="btn btn-dark btn-sm" href="">Delete</a></td>
 					</tr>
+					{% endfor %}
+					
 
-					<tr>
-						<td>122523123</td>
-						<td>11-29-2020</td>
-						<td>7</td>
-						<td>$53.65</td>
-						<td><a class="btn btn-dark btn-sm" href="">View Order</a></td>
-					</tr>
+					
 				</table>
 			</div>
-		</div> {% endcomment %}
+		</div>
 	</div>
 </div>
 

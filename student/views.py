@@ -143,10 +143,11 @@ def logoutUser(request):
 
 @student_required
 def StudentAccount(request):
-	profile = request.user.student
+    profile = request.user.student
+    subs =  SubscripeTeacher.objects.filter(student =profile)
+    context = {'subs':subs, 'profile':profile}
+    return render(request, 'student/account.html',context)
 
-	context = {'profile':profile}
-	return render(request, 'student/account.html', context)
 
 @student_required
 def updateProfile(request):
@@ -202,8 +203,3 @@ def subscripeTeach(request,slug):
 
 
 
-def studentsubteach(request):
-    student = request.user.student
-    subs =  SubscripeTeacher.objects.filter(student =student)
-    context = {'subs':subs}
-    return render(request, 'student/studentsubscripe.html',context)
