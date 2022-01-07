@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from django.contrib.messages import constants as messages
 import os 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,9 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-zvhvlfzsv)wr%kxf1e5@a(z=c7j4o72*$%nphl=&k*hh4&lbsy'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = False
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -156,3 +156,13 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "abderahmanemahdigharzouli19@gmail.com"
 EMAIL_HOST_PASSWORD = 'znqqvrjjvcmwpsob'
+
+
+# MESSAGE_TAGS = {
+#     messages.DEBUG: 'alert-secondary',
+#     messages.INFO: 'alert-info',
+#     messages.SUCCESS: 'alert-success',
+#     messages.WARNING: 'alert-warning',
+#     messages.ERROR: 'alert-danger',
+# }
+
